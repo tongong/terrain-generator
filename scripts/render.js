@@ -1,4 +1,5 @@
-function render(points, polygons, rotation) {
+function render(points, polygons, modes, rotation) {
+ //Modes: 0: polygon, 1-4: wall
  rotation *= TWO_PI;
  
  // extract points
@@ -13,7 +14,7 @@ function render(points, polygons, rotation) {
  // sort the polygons
  let rot = createVector(round(cos(rotation) * 1000) / 1000, round(-sin(rotation) * 1000) / 1000);
  
- polygons.forEach(polygon => {
+ polygons.forEach((polygon,index) => {
   let sum = createVector(0, 0);
   polygon.forEach(corner => {
    sum.x += corner.x;
@@ -25,6 +26,7 @@ function render(points, polygons, rotation) {
   sum.z /= polygon.length;
   polygon.average = Object.assign({}, sum);
   polygon.depth = -polygon.average.x * rot.y - polygon.average.y * rot.x;
+  polygon.mode = modes[index];
  });
  
  polygons.sort(function(a, b) {
@@ -36,7 +38,11 @@ function render(points, polygons, rotation) {
  
  // draw to the screen
  polygons.forEach(polygon => {
+  if (polygon.mode!==0) {
+   drawWall(polygon.mode, polygon, rotation);
+  } else {
   drawPolygon(polygon, rotation);
+  }
  });
 }
 
@@ -66,19 +72,32 @@ function drawWall(side, points, rotation) {
    vertex(CENTER.x + points[0].x, 0);
    break;
   case 2:
-   vertex(WIDTH, CENTER.y - item.y - ANGLE+SIZE/2);
+   vertex(WIDTH, CENTER.y - points[0].y - ANGLE+SIZE/2);
    break;
   case 3:
    vertex(CENTER.x + points[0].x, HEIGHT);
    break;
   case 4:
-   vertex(0, CENTER.y - item.y - ANGLE+SIZE/2);
+   vertex(0, CENTER.y - points[0].y - ANGLE+SIZE/2);
    break;
  }
  points.forEach(function(item) {
   vertex(CENTER.x + item.x, CENTER.y - item.y - ANGLE+SIZE/2);
  });
- vertex(CENTER.x + points[0].x, CENTER.y - points[0].y - ANGLE+SIZE/2);
+switch(side) {
+  case 1:
+   vertex(CENTER.x + points[points.length-1].x, 0);
+   break;
+  case 2:
+   vertex(WIDTH, CENTER.y - points[points.length-1].y - ANGLE+SIZE/2);
+   break;
+  case 3:
+   vertex(CENTER.x + points[points.length-1].x, HEIGHT);
+   break;
+  case 4:
+   vertex(0, CENTER.y - points[points.length-1].y - ANGLE+SIZE/2);
+   break;
+ }
  endShape();
 }
 

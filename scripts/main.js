@@ -89,4 +89,5 @@ function draw() {
       }
       break;
     }
+    //drawWall(3, [{x:-100,y:100,z:100},{x:100,y:-100,z:100}],getRotation()*TWO_PI);
 }

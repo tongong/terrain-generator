@@ -89,19 +89,31 @@ class Terrain {
   
   //Terrain triangles
   let polygons = [];
+  let modes = [];
   for (let i = 0; i < length-1; i++) {
    for (let j = 0; j < length-1; j++) {
     if (j-i+1<this.dimension && i-j<this.dimension) {
+     modes.push(0,0);
      polygons.push([i*length+j, i*length+j+1,(i+1)*length+j+1]);
      polygons.push([j*length+i, (j+1)*length+i,(j+1)*length+i+1]);
     }
    }
   }
   
-  //Borders
-  //polygons.push([0,1,2,length*length,length*length+1]);
+  //Walls
+  let walls = [[],[],[],[],[],[]];
+  for (let i = 0; i < this.dimension; i++) {
+   walls[0].push(i);
+   walls[1].push(i*length);
+   walls[2].push(this.dimension+i*(length+1)-1);
+   walls[3].push((this.dimension-1)*length+i*(length+1));
+   walls[4].push(length*length-i-1);
+   walls[5].push(length*(length-i)-1);
+  }
+  polygons.push(walls[0],walls[1],walls[2],walls[3],walls[4],walls[5]);
+  modes.push(3,3,3,3,3,3);
   
-  render(points,polygons,rotation);
+  render(points,polygons,modes,rotation);
  }
 }
 
