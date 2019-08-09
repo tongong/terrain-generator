@@ -3,7 +3,6 @@ class Terrain {
  constructor(dimension, filled) {
   this.dimension = dimension;
   this.field = [];
-  this.bottomHeight = 0.5;
   
   let length = dimension*2-1;
   for (let i = 0; i < length; i++) {
@@ -20,9 +19,6 @@ class Terrain {
    for (let j = 0; j < length; j++) {
      this.field[i][j] += (destination.field[i][j] - this.field[i][j])*speed;
    }
-  }
-  if (this.bottomHeight != destination.bottomHeight) {
-  this.bottomHeight += (destination.bottomHeight - this.bottomHeight)*speed;
   }
  }
  
@@ -74,18 +70,6 @@ class Terrain {
      )));
    }
   }
-  
-  //Border points
-  points.push(tri(createVector(
-   this.dimension*scaleXY,
-   0,
-   this.bottomHeight*scaleZ
-   )));
-  points.push(tri(createVector(
-   0,
-   this.dimension*scaleXY,
-   this.bottomHeight*scaleZ
-  )));
   
   //Terrain triangles
   let polygons = [];

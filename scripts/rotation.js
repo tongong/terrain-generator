@@ -8,7 +8,7 @@ var currentRotation = 0;
 var mouseState = false;
 
 function getRotation() {
- var aktMillis = millis();
+ let aktMillis = millis();
  if (mouseIsPressed) {
   if (!mouseState) {
    startPress = mouseX + currentRotation * 1000;
@@ -16,7 +16,7 @@ function getRotation() {
    startPressRotation = currentRotation;
    mouseState = true;
   }
-  currentRotation = (mouseX - startPress) / -1000;
+  currentRotation = - (mouseX - startPress) / 1000;
  } else {
   if (mouseState) {
    spin = (currentRotation - startPressRotation) / (millis() - startPressTime);
