@@ -15,6 +15,9 @@ var stateNumber = 0;
 var currentField;
 var endField;
 
+var startMillis;
+const time = () =>  (typeof(startMillis)=="undefined")?0:millis()-startMillis;
+
 function setup() {
     CENTER = createVector(WIDTH / 2, HEIGHT / 2);
     CENTER_HORIZON = createVector(0, 0);
@@ -28,6 +31,8 @@ function setup() {
     
     endField = new Terrain(2, true);
     currentField = new Terrain(2, false);
+
+    startMillis = 0;
 }
 
 function draw() {
@@ -35,7 +40,7 @@ function draw() {
     
     switch (state) {
      case 0:
-      statePercentage = millis()/20;
+      statePercentage = time()/20;
       line(CENTER.x,HEIGHT,CENTER.x,CENTER.y*(2-statePercentage/100));
       if (statePercentage >= 100) {
        state = 1;
@@ -43,7 +48,7 @@ function draw() {
       }
       break;
      case 1:
-      statePercentage = millis()/10-200;
+      statePercentage = time()/10-200;
       currentField.render(statePercentage/100*SIZE, SIZE, getRotation());
       if (statePercentage >= 100) {
        state = 2;
@@ -51,7 +56,7 @@ function draw() {
       }
       break;
      case 2:
-      statePercentage = millis()/10-300;
+      statePercentage = time()/10-300;
       currentField.transform(endField,0.1);
       currentField.render(SIZE, SIZE, getRotation());
       if (statePercentage >= 100) {
@@ -62,7 +67,7 @@ function draw() {
       }
       break;
      case 3:
-      statePercentage = millis()/10-100*(4+stateNumber);
+      statePercentage = time()/10-100*(4+stateNumber);
       currentField.transform(endField,0.1);
       currentField.render(SIZE/pow(2,stateNumber+1), SIZE, getRotation());
       if (statePercentage >= 100 && stateNumber < MAX_STATE-2) {
