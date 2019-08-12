@@ -25,8 +25,14 @@ function render(points, polygons, modes, rotation) {
   sum.y /= polygon.length;
   sum.z /= polygon.length;
   polygon.average = Object.assign({}, sum);
-  polygon.depth = -polygon.average.x * rot.y - polygon.average.y * rot.x;
+  polygon.depth = depth(polygon.average, rot);
+  polygon.size = abs(createVector(polygon[0].x,polygon[0].y).dist(createVector(polygon[polygon.length-1].x,polygon[polygon.length-1].y)));
   polygon.mode = modes[index];
+  if (polygon.depth>0) {
+   polygon.depth *= polygon.size;
+  } else {
+   polygon.depth *= polygon.size;
+  }
  });
  
  polygons.sort(function(a, b) {
@@ -34,6 +40,25 @@ function render(points, polygons, modes, rotation) {
    return abs(b.average.z) - abs(a.average.z);
   }*/
   return a.depth - b.depth;
+  /*let start1 = a.average;
+  let start2 = b[0];
+  let end1 = createVector(a.average.x+rot.x,a.average.y+rot.y);
+  let end2 = b[1];
+  
+  // Two lines f(x) = m * x + n
+  let m1 = (end1.y - start1.y) / ((rot.x==0)?99999:end1.x - start1.x);
+  let m2 = (end2.y - start2.y) / ((end2.x == start2.x)?99999:end2.x - start2.x);
+  let n1 = end1.y - end1.x * m1;
+  let n2 = end2.y - end2.x * m2;
+  
+  let crossX = (n2 - n1) / (m1 - m2);
+  let crossY = crossX * m1 + n1;
+  
+  if (mouseIsPressed) {
+    console.log(crossX,crossY);
+  }
+  return a.depth + crossX * rot.y + crossY * rot.x;*/
+  
  });
  
  // draw to the screen
@@ -44,6 +69,10 @@ function render(points, polygons, modes, rotation) {
   drawPolygon(polygon, rotation);
   }
  });
+}
+
+function depth(point, rotation) {
+  return - point.x * rotation.y - point.y * rotation.x;
 }
 
 function drawPolygon(points, rotation) {
