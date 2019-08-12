@@ -3,10 +3,10 @@ const WIDTH = window.innerWidth;
 var CENTER_HORIZON;
 var LEFT_HORIZON;
 var CENTER;
-const ANGLE = 300;
-const RANDOM_FACTOR = 0.4;
+var ANGLE;
+var RANDOM_FACTOR = 0.5;
 var SIZE;
-const MAX_STATE = 4;
+var MAX_STATE = 5;
 
 var state = 0;
 var statePercentage = 0;
@@ -21,8 +21,9 @@ const time = () => (typeof(startMillis) == "undefined") ? 0 : millis() - startMi
 function setup() {
     CENTER = createVector(WIDTH / 2, HEIGHT / 2);
     CENTER_HORIZON = createVector(0, 0);
-    LEFT_HORIZON = createVector(-500, 0);
-    SIZE = ((HEIGHT > WIDTH) ? WIDTH : HEIGHT) / 2 - 50;
+    LEFT_HORIZON = createVector(-CENTER.x, 0);
+    SIZE = min(HEIGHT / 3, WIDTH / 2 - 50, 500);
+    ANGLE = SIZE * 2;
 
     createCanvas(WIDTH, HEIGHT);
     stroke(255);
