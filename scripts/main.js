@@ -6,7 +6,7 @@ var CENTER;
 var ANGLE;
 var RANDOM_FACTOR = 0.5;
 var SIZE;
-var MAX_STATE = 5;
+var MAX_STATE = 4;
 
 var state = 0;
 var statePercentage = 0;
@@ -22,9 +22,9 @@ function setup() {
     CENTER = createVector(WIDTH / 2, HEIGHT / 2);
     CENTER_HORIZON = createVector(0, 0);
     LEFT_HORIZON = createVector(-CENTER.x, 0);
-    SIZE = min(HEIGHT / 3, WIDTH / 2 - 50, 500);
-    ANGLE = SIZE * 2;
-
+    SIZE = min([HEIGHT / 3, WIDTH / 2 - 70, 500]);
+    ANGLE = SIZE * 1.5;
+    console.log(SIZE);
     createCanvas(WIDTH, HEIGHT);
     stroke(255);
     strokeJoin(ROUND);
