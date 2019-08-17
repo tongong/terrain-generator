@@ -1,5 +1,5 @@
-const HEIGHT = window.innerHeight;
-const WIDTH = window.innerWidth;
+var HEIGHT = window.innerHeight;
+var WIDTH = window.innerWidth;
 var CENTER_HORIZON;
 var LEFT_HORIZON;
 var CENTER;
@@ -19,11 +19,13 @@ var startMillis;
 const time = () => (typeof(startMillis) == "undefined") ? 0 : millis() - startMillis;
 
 function setup() {
-    CENTER = createVector(WIDTH / 2, HEIGHT / 2);
-    CENTER_HORIZON = createVector(0, 0);
-    LEFT_HORIZON = createVector(-CENTER.x, 0);
     SIZE = min([HEIGHT / 3, WIDTH / 2 - 70, 500]);
     ANGLE = SIZE * 1.5;
+
+    CENTER = createVector(WIDTH / 2, HEIGHT / 2);
+    CENTER_HORIZON = createVector(0, 0);
+    LEFT_HORIZON = createVector(-2 * SIZE, 0);
+
     console.log(SIZE);
     createCanvas(WIDTH, HEIGHT);
     stroke(255);
