@@ -4,9 +4,11 @@ var CENTER_HORIZON;
 var LEFT_HORIZON;
 var CENTER;
 var ANGLE;
-var RANDOM_FACTOR = 0.5;
 var SIZE;
+
+var RANDOM_FACTOR = 0.5;
 var MAX_STATE = 4;
+var ANGLE_FACTOR = 1.5;
 
 var state = 0;
 var statePercentage = 0;
@@ -19,23 +21,29 @@ var startMillis;
 const time = () => (typeof(startMillis) == "undefined") ? 0 : millis() - startMillis;
 
 function setup() {
+    initIconAnimation();
+    initVars();
+
+    var canvas = createCanvas(WIDTH, HEIGHT);
+    canvas.mousePressed(mousePress);
+    canvas.mouseReleased(mouseRelease);
+    stroke(255);
+    strokeJoin(ROUND);
+    fill(0);
+}
+
+function initVars() {
     SIZE = min([HEIGHT / 3, WIDTH / 2 - 70, 500]);
-    ANGLE = SIZE * 1.5;
+    ANGLE = SIZE * ANGLE_FACTOR;
 
     CENTER = createVector(WIDTH / 2, HEIGHT / 2);
     CENTER_HORIZON = createVector(0, 0);
     LEFT_HORIZON = createVector(-2 * SIZE, 0);
 
-    console.log(SIZE);
-    createCanvas(WIDTH, HEIGHT);
-    stroke(255);
-    strokeJoin(ROUND);
-    fill(0);
-
     endField = new Terrain(2, true);
     currentField = new Terrain(2, false);
 
-    startMillis = 0;
+    startMillis = millis();
 }
 
 function draw() {

@@ -1,0 +1,29 @@
+@keyframes rotate {
+    from {
+        transform: rotate(0)
+    }
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.icon.animated {
+    animation: rotate 0.8s;
+}
+
+#defaultCanvas0 {
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#overlay {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+}

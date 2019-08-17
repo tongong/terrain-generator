@@ -5,22 +5,23 @@ const NORMAL_SPIN = 0.0001;
 var spin = NORMAL_SPIN;
 var lastMillis = 0;
 var currentRotation = 0;
-var mouseState = false;
+var mousePressed = false;
+var pmousePressed = false;
 
 function getRotation() {
     let aktMillis = millis();
-    if (mouseIsPressed) {
-        if (!mouseState) {
+    if (mousePressed) {
+        if (!pmousePressed) {
             startPress = mouseX + currentRotation * 1000;
             startPressTime = millis();
             startPressRotation = currentRotation;
-            mouseState = true;
+            pmousePressed = true;
         }
         currentRotation = -(mouseX - startPress) / 1000;
     } else {
-        if (mouseState) {
+        if (pmousePressed) {
             spin = (currentRotation - startPressRotation) / (millis() - startPressTime);
-            mouseState = false;
+            pmousePressed = false;
         }
         if (spin > NORMAL_SPIN) {
             spin = NORMAL_SPIN + (spin - NORMAL_SPIN) * 0.9;
@@ -32,4 +33,15 @@ function getRotation() {
     }
     lastMillis = aktMillis;
     return currentRotation;
+}
+
+function mousePress() {
+    mousePressed = true;
+    console.log("bum");
+}
+
+function mouseRelease() {
+    mousePressed = false;
+    console.log("ba");
+
 }
