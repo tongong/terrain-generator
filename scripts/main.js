@@ -10,29 +10,36 @@ var RANDOM_FACTOR = 0.5;
 var MAX_STATE = 4;
 var ANGLE_FACTOR = 1.5;
 
-var state = 0;
+var state;
 var statePercentage = 0;
-var stateNumber = 0;
+var stateNumber;
 
 var currentField;
 var endField;
+
+var addHeight;
 
 var startMillis;
 const time = () => (typeof(startMillis) == "undefined") ? 0 : millis() - startMillis;
 
 function setup() {
-    initIconAnimation();
-    initVars();
-
     var canvas = createCanvas(WIDTH, HEIGHT);
     canvas.mousePressed(mousePress);
     canvas.mouseReleased(mouseRelease);
+    canvas.touchStarted(mousePress);
+    canvas.touchEnded(mouseRelease);
+
+    initIconAnimation();
+    initVars();
+
     stroke(255);
     strokeJoin(ROUND);
     fill(0);
 }
 
 function initVars() {
+    HEIGHT = window.innerHeight;
+    WIDTH = window.innerWidth;
     SIZE = min([HEIGHT / 3, WIDTH / 2 - 70, 500]);
     ANGLE = SIZE * ANGLE_FACTOR;
 
@@ -43,6 +50,9 @@ function initVars() {
     endField = new Terrain(2, true);
     currentField = new Terrain(2, false);
 
+    state = 0;
+    addHeight = 0;
+    stateNumber = 0;
     startMillis = millis();
 }
 
@@ -86,6 +96,15 @@ function draw() {
                 stateNumber++;
                 currentField = currentField.scaleUp();
                 endField = currentField.addRandom(pow(RANDOM_FACTOR, stateNumber + 1));
+            }
+            break;
+        case 4:
+            statePercentage = (millis() - refreshTime) / 10;
+            addHeight = statePercentage / 100 * HEIGHT;
+            currentField.render(SIZE / pow(2, stateNumber + 1), SIZE, getRotation());
+            if (statePercentage >= 100) {
+                statePercentage = 0;
+                initVars();
             }
             break;
     }

@@ -57,9 +57,9 @@ function drawPolygon(points, rotation) {
     });
     beginShape();
     points.forEach(function(item) {
-        vertex(CENTER.x + item.x, CENTER.y - item.y - ANGLE + SIZE / 2);
+        vertex(CENTER.x + item.x, CENTER.y - item.y - ANGLE + SIZE / 2 + addHeight);
     });
-    vertex(CENTER.x + points[0].x, CENTER.y - points[0].y - ANGLE + SIZE / 2);
+    vertex(CENTER.x + points[0].x, CENTER.y - points[0].y - ANGLE + SIZE / 2 + addHeight);
     endShape();
 }
 
@@ -87,30 +87,30 @@ function drawWall(side, points, rotation) {
                 vertex(CENTER.x + points[0].x, 0);
                 break;
             case 2:
-                vertex(WIDTH, CENTER.y - points[0].y - ANGLE + SIZE / 2);
+                vertex(WIDTH, CENTER.y - points[0].y - ANGLE + SIZE / 2 + addHeight);
                 break;
             case 3:
-                vertex(CENTER.x + points[0].x, HEIGHT);
+                vertex(CENTER.x + points[0].x, HEIGHT + addHeight);
                 break;
             case 4:
-                vertex(0, CENTER.y - points[0].y - ANGLE + SIZE / 2);
+                vertex(0, CENTER.y - points[0].y - ANGLE + SIZE / 2 + addHeight);
                 break;
         }
         points.forEach(function(item) {
-            vertex(CENTER.x + item.x, CENTER.y - item.y - ANGLE + SIZE / 2);
+            vertex(CENTER.x + item.x, CENTER.y - item.y - ANGLE + SIZE / 2 + addHeight);
         });
         switch (side) {
             case 1:
                 vertex(CENTER.x + points[points.length - 1].x, 0);
                 break;
             case 2:
-                vertex(WIDTH, CENTER.y - points[points.length - 1].y - ANGLE + SIZE / 2);
+                vertex(WIDTH, CENTER.y - points[points.length - 1].y - ANGLE + SIZE / 2 + addHeight);
                 break;
             case 3:
-                vertex(CENTER.x + points[points.length - 1].x, HEIGHT);
+                vertex(CENTER.x + points[points.length - 1].x, HEIGHT + addHeight);
                 break;
             case 4:
-                vertex(0, CENTER.y - points[points.length - 1].y - ANGLE + SIZE / 2);
+                vertex(0, CENTER.y - points[points.length - 1].y - ANGLE + SIZE / 2 + addHeight);
                 break;
         }
         endShape();

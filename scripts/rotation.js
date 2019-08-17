@@ -37,11 +37,8 @@ function getRotation() {
 
 function mousePress() {
     mousePressed = true;
-    console.log("bum");
 }
 
 function mouseRelease() {
     mousePressed = false;
-    console.log("ba");
-
 }
