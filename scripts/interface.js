@@ -10,13 +10,13 @@ function initIconAnimation() {
             this.classList.remove("animated");
         }, false);
     }
-    document.getElementById("reload").addEventListener('touchstart', function() {
-        this.clasaslist.add("animated");
-    }, false);
     document.getElementById("reload").addEventListener("click", function() {
         if (state == 3) {
             refreshTime = millis();
             state = 4;
         }
+    }, false);
+    document.getElementById("reload").addEventListener('touchstart', function() {
+     this.classList.add("animated");
     }, false);
 }
