@@ -57,7 +57,7 @@ function initVars() {
 }
 
 function draw() {
-    background(0);
+    background(80);
 
     switch (state) {
         case 0:

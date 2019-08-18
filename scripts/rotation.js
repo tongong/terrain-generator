@@ -36,6 +36,7 @@ function getRotation() {
 }
 
 function mousePress() {
+    document.getElementById("settings").classList.remove("in");
     mousePressed = true;
 }
 
