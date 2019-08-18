@@ -10,6 +10,9 @@ function initIconAnimation() {
             this.classList.remove("animated");
         }, false);
     }
+    document.getElementById("reload").addEventListener('touchstart', function() {
+        this.clasaslist.add("animated");
+    }, false);
     document.getElementById("reload").addEventListener("click", function() {
         if (state == 3) {
             refreshTime = millis();
