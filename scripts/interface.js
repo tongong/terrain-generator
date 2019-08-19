@@ -27,7 +27,12 @@ function initIconAnimation() {
         this.classList.remove("animated");
     }, false);
     settings.addEventListener("click", function() {
-        document.getElementById("settings").classList.add("in");
+        var settings = document.getElementById("settings");
+        if (settings.classList.contains("in")) {
+            settings.classList.remove("in");
+        } else {
+            settings.classList.add("in");
+        }
     }, false);
     settings.addEventListener('touchstart', function() {
         this.classList.add("animated");
