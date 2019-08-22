@@ -1,4 +1,4 @@
-var refreshTime;
+var refreshTime = 0;
 
 function initIconAnimation() {
     var reload = document.getElementById("reloadIcon");
@@ -11,10 +11,8 @@ function initIconAnimation() {
         this.classList.remove("animated");
     }, false);
     reload.addEventListener("click", function() {
-        if (state == 3) {
             refreshTime = millis();
-            state = 4;
-        }
+            //state = 4;
     }, false);
     reload.addEventListener('touchstart', function() {
         this.classList.add("animated");

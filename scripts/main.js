@@ -53,16 +53,25 @@ function initVars() {
     state = 0;
     addHeight = 0;
     stateNumber = 0;
+    refreshTime = 0;
     startMillis = millis();
 }
 
 function draw() {
     background(80);
-
+    
+    if (refreshTime != 0) {
+        addHeight = (millis() - refreshTime) / 1000 * HEIGHT;
+        if ((millis() - refreshTime) >= 1000) {
+            statePercentage = 0;
+            initVars();
+        }
+    }
+    
     switch (state) {
         case 0:
             statePercentage = time() / 20;
-            line(CENTER.x, HEIGHT, CENTER.x, CENTER.y * (2 - statePercentage / 100));
+            line(CENTER.x, HEIGHT + addHeight, CENTER.x, CENTER.y * (2 - statePercentage / 100) + addHeight);
             if (statePercentage >= 100) {
                 state = 1;
                 statePercentage = 0;
@@ -96,15 +105,6 @@ function draw() {
                 stateNumber++;
                 currentField = currentField.scaleUp();
                 endField = currentField.addRandom(pow(RANDOM_FACTOR, stateNumber + 1));
-            }
-            break;
-        case 4:
-            statePercentage = (millis() - refreshTime) / 10;
-            addHeight = statePercentage / 100 * HEIGHT;
-            currentField.render(SIZE / pow(2, stateNumber + 1), SIZE, getRotation());
-            if (statePercentage >= 100) {
-                statePercentage = 0;
-                initVars();
             }
             break;
     }
