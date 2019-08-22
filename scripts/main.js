@@ -65,6 +65,7 @@ function draw() {
         if ((millis() - refreshTime) >= 1000) {
             statePercentage = 0;
             initVars();
+            resizeCanvas(WIDTH, HEIGHT);
         }
     }
     
