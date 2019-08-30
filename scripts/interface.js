@@ -11,8 +11,7 @@ function initIconAnimation() {
         this.classList.remove("animated");
     }, false);
     reload.addEventListener("click", function() {
-            refreshTime = millis();
-            //state = 4;
+        refreshTime = millis();
     }, false);
     reload.addEventListener('touchstart', function() {
         this.classList.add("animated");

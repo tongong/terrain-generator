@@ -6,9 +6,9 @@ var CENTER;
 var ANGLE;
 var SIZE;
 
-var RANDOM_FACTOR = 0.5;
-var MAX_STATE = 4;
-var ANGLE_FACTOR = 1.5;
+var RANDOM_FACTOR = 0.5; // 0 - 1
+var MAX_STATE = 4; // 1 - 8
+var ANGLE_FACTOR = 1.5; // 0.5 - 2.5
 
 var state;
 var statePercentage = 0;
@@ -87,25 +87,14 @@ function draw() {
             }
             break;
         case 2:
-            statePercentage = time() / 10 - 300;
+            statePercentage = time() / 10 - 100 * (3 + stateNumber);
             currentField.transform(endField, 0.1);
-            currentField.render(SIZE, SIZE, getRotation());
-            if (statePercentage >= 100) {
-                state = 3;
-                statePercentage = 0;
-                currentField = currentField.scaleUp();
-                endField = currentField.addRandom(RANDOM_FACTOR);
-            }
-            break;
-        case 3:
-            statePercentage = time() / 10 - 100 * (4 + stateNumber);
-            currentField.transform(endField, 0.1);
-            currentField.render(SIZE / pow(2, stateNumber + 1), SIZE, getRotation());
-            if (statePercentage >= 100 && stateNumber < MAX_STATE - 2) {
+            currentField.render(SIZE / pow(2, stateNumber), SIZE, getRotation());
+            if (statePercentage >= 100 && stateNumber < MAX_STATE - 1) {
                 statePercentage = 0;
                 stateNumber++;
                 currentField = currentField.scaleUp();
-                endField = currentField.addRandom(pow(RANDOM_FACTOR, stateNumber + 1));
+                endField = currentField.addRandom(pow(RANDOM_FACTOR, stateNumber));
             }
             break;
     }
