@@ -59,7 +59,7 @@ function initVars() {
 
 function draw() {
     background(80);
-    
+
     if (refreshTime != 0) {
         addHeight = (millis() - refreshTime) / 1000 * HEIGHT;
         if ((millis() - refreshTime) >= 1000) {
@@ -68,7 +68,7 @@ function draw() {
             resizeCanvas(WIDTH, HEIGHT);
         }
     }
-    
+
     switch (state) {
         case 0:
             statePercentage = time() / 20;
