@@ -1,9 +1,4 @@
-@font-face {
-    font-family: Obuda;
-    font-weight: bold;
-    src: url("Obuda-Bold.otf") format("opentype");
-}
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700&display=swap');
 @keyframes rotate {
     from {
         transform: rotate(0)
@@ -73,7 +68,7 @@ body {
 
 p {
     color: white;
-    font-family: 'Obuda', Fallback, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 a {

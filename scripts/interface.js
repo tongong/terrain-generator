@@ -3,6 +3,9 @@ var refreshTime = 0;
 function initIconAnimation() {
     var reload = document.getElementById("reloadIcon");
     var settings = document.getElementById("settingsIcon");
+    var sizeSlider = document.getElementById("sizeSlider");
+    var randomSlider = document.getElementById("randomSlider");
+    var viewSlider = document.getElementById("viewSlider");
 
     reload.addEventListener("mouseenter", function() {
         this.classList.add("animated");
@@ -33,5 +36,13 @@ function initIconAnimation() {
     }, false);
     settings.addEventListener('touchstart', function() {
         this.classList.add("animated");
+    }, false);
+
+    viewSlider.value = 50;
+    randomSlider.value = 50;
+    sizeSlider.value = 4;
+    viewSlider.addEventListener('input', function() {
+        ANGLE_FACTOR = this.value / 50 + 0.5;
+        ANGLE = SIZE * ANGLE_FACTOR;
     }, false);
 }
