@@ -58,7 +58,7 @@ function initVars() {
 }
 
 function draw() {
-    background(80);
+    background(0);
 
     if (refreshTime != 0) {
         addHeight = (millis() - refreshTime) / 1000 * HEIGHT;

@@ -45,4 +45,16 @@ function initIconAnimation() {
         ANGLE_FACTOR = this.value / 50 + 0.5;
         ANGLE = SIZE * ANGLE_FACTOR;
     }, false);
+    randomSlider.addEventListener('change', function() {
+        RANDOM_FACTOR = this.value / 100;
+        refreshTime = millis();
+    }, false);
+    sizeSlider.addEventListener('change', function() {
+        if (this.value >= MAX_STATE) {
+            MAX_STATE = this.value;
+        } else {
+            MAX_STATE = this.value;
+            refreshTime = millis();
+        }
+    }, false);
 }
